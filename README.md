@@ -2,6 +2,8 @@
 <p>
 </p>
 
+![Sample](https://github.com/itsshaikhaj/MEAN_ToDo_App/blob/main/sample.gif)
+
 ## Install
 
 ```sh
