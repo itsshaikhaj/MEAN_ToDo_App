@@ -1,0 +1,81 @@
+<div style="width: 60%;margin: auto">
+  <div style="text-align: center;">
+    <h1>To Do App</h1>
+  </div>
+
+  <div style="text-align: end;">
+    <button mat-raised-button color="primary" (click)="openDialog()">Add Task</button>
+  </div>
+  <div>
+    <mat-form-field appearance="standard">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Sr No. </th>
+          <td mat-cell *matCellDef="let row; let i=index;" [ngClass]="row.is_completed == true ? 'complete' : 'incomplete'"> {{ i + 1 }}  </td>
+        </ng-container>
+
+        <!-- Title  Column-->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+          <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+        </ng-container>
+
+        <!-- Description Column -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+          <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+          <td mat-cell *matCellDef="let row"> {{row.is_completed== true ? 'Completed' : 'In Progress' }} </td>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+          <td mat-cell *matCellDef="let row" style="display: flex;">
+            <div class="example-button-container" style="margin: 15px;">
+              <button mat-mini-fab color="success" aria-label="Example icon button with a menu icon"
+                [disabled]="row.is_completed" (click)="markCompleted(row._id)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" class="bi bi-check"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                </svg>
+              </button>
+            </div>
+            <div class="example-button-container" style="margin: 15px;">
+              <button mat-mini-fab color="warn" aria-label="Example icon button with a plus one icon"
+                (click)="delete(row._id)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" class="bi bi-trash-fill"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                </svg>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color: #3f51b5;color: white"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          [ngStyle]="{ 'background': ( row.is_completed ? '#68B984' : '#f1ce8d') }"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4" *ngIf="input.value" >No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+</div>

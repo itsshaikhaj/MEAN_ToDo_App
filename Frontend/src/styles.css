@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+::ng-deep .green-snackbar {
+  background: #0d8119;
+}
+
+::ng-deep .mat-snack-bar-container{
+  color: #155724 !important;
+  background-color: green !important;
+  border-color: #c3e6cb !important;
+}
+::ng-deep .mat-simple-snackbar-action {
+  color: red;
+}
